@@ -1,4 +1,4 @@
-export ZSH="/Users/florian/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=powerlevel10k/powerlevel10k
 
 plugins=(
@@ -13,10 +13,9 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-[[ -f ~/.env ]] && source ~/.env
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
-alias aws.dev.ec2='aws ec2 --endpoint-url https://dev-portal.cloudbit.ch/api/v2/aws/ec2/'
-alias aws.dev.s3='aws s3 --endpoint-url https://dev-portal.cloudbit.ch/api/v2/aws/ec2/'
+[[ -f "$HOME/.env" ]] && source "$HOME/.env"
+[[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
 
 alias pretty='python -m json.tool'
+
+function gi() { curl -sLw "\n" https://www.gitignore.io/api/$@ ;}
