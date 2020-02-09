@@ -1,6 +1,7 @@
 set nocompatible
 filetype off
 
+" vundle plugins
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -17,6 +18,7 @@ Plugin 'junegunn/fzf.vim'
 call vundle#end()
 filetype plugin indent on
 
+" theme
 colorscheme gruvbox
 set background=dark
 
@@ -28,10 +30,15 @@ nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
 nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
 nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
+" fuzzy finder
+set rtp+=~/.fzf
 noremap <C-o> :FZF<CR>
+
+" nerdtree
 noremap <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" status line
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -43,11 +50,14 @@ let g:lightline = {
 set laststatus=2
 set noshowmode
 
+" tabs to spaces
 set backspace=2
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" enable line numbers
 set number
 
+" enable syntax highlighting
 syntax on

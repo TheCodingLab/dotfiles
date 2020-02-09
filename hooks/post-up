@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if [ ! -f "$HOME/.fzf/bin/fzf" ]; then
+   "$HOME/.fzf/install" --64 --bin
+fi
