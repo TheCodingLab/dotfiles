@@ -13,6 +13,7 @@ Plugin 'stephpy/vim-yaml'
 Plugin 'fatih/vim-go'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'morhetz/gruvbox'
+Plugin 'junegunn/fzf.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -27,7 +28,9 @@ nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
 nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
 nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
-map <C-n> :NERDTreeToggle<CR>
+noremap <C-o> :FZF<CR>
+noremap <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let g:lightline = {
       \ 'colorscheme': 'wombat',
