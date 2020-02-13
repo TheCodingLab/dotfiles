@@ -15,8 +15,15 @@ Plugin 'fatih/vim-go'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'morhetz/gruvbox'
 Plugin 'junegunn/fzf.vim'
+Plugin 'ycm-core/YouCompleteMe'
+
+Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'phpstan/vim-phpstan'
 call vundle#end()
 filetype plugin indent on
+
+set encoding=utf-8
 
 " theme
 colorscheme gruvbox
@@ -30,6 +37,10 @@ nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
 nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
 nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
+" navigation
+noremap <Tab> :tabnext<CR>
+noremap <S-Tab> :tabprev<CR>
+
 " fuzzy finder
 set rtp+=~/.fzf
 noremap <C-o> :FZF<CR>
@@ -37,6 +48,7 @@ noremap <C-o> :FZF<CR>
 " nerdtree
 noremap <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeWinSize=50
 
 " status line
 let g:lightline = {
@@ -59,5 +71,14 @@ set expandtab
 " enable line numbers
 set number
 
-" enable syntax highlighting
+" syntax highlighting
 syntax on
+autocmd BufNewFile,BufRead *.twig set syntax=html
+
+" PHP
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
+endfunction
+autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
