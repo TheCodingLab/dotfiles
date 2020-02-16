@@ -21,6 +21,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'phpstan/vim-phpstan'
+Plugin 'phpactor/phpactor'
 call vundle#end()
 filetype plugin indent on
 
@@ -83,3 +84,4 @@ function! IPhpInsertUse()
 endfunction
 autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
 autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>t :call phpactor#Transform()<CR>
