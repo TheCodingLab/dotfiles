@@ -9,6 +9,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tpope/vim-surround'
+Plugin 'terryma/vim-multiple-cursors'
 
 Plugin 'morhetz/gruvbox'
 Plugin 'itchyny/lightline.vim'
@@ -46,6 +47,13 @@ nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 noremap <Tab> :tabnext<CR>
 noremap <S-Tab> :tabprev<CR>
 noremap <Leader>b :ls<CR>:b<space>
+
+let g:multi_cursor_use_default_mapping = 0
+let g:multi_cursor_start_word_key      = '<C-d>'
+let g:multi_cursor_next_key            = '<C-d>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
 
 " fuzzy finder
 set rtp+=~/.fzf
