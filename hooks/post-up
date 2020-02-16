@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-vim +PluginInstall +qall
+vim +PluginInstall +qall < /dev/tty
 
 if [ ! -f "$HOME/.fzf/bin/fzf" ]; then
     pushd "$HOME/.fzf/bin/fzf"
