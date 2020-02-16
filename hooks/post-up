@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+vim +PluginInstall +qall
+
 if [ ! -f "$HOME/.fzf/bin/fzf" ]; then
-   "$HOME/.fzf/install" --64 --bin
+    pushd "$HOME/.fzf/bin/fzf"
+    ./install --64 --bin
+    popd
+fi
+
+if [ ! -f "$HOME/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so" ]; then
+    pushd "$HOME/.vim/bundle/YouCompleteMe"
+    ./install.py --clang-completer --go-completer
+    popd
+fi
+
+if [ -d "$HOME/.vim/bundle/phpactor" ] && [ ! -d "$HOME/.vim/bundle/phpactor/vendor" ]; then 
+    pushd "$HOME/.vim/bundle/phpactor"
+    composer install
+    popd
 fi
