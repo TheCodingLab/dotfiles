@@ -34,6 +34,7 @@ set encoding=utf-8
 " theme
 colorscheme gruvbox
 set background=dark
+let g:gruvbox_contrast_dark='hard'
 
 nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
 nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
