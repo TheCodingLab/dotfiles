@@ -16,6 +16,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'morhetz/gruvbox'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ycm-core/YouCompleteMe'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'shawncplus/phpcomplete.vim'
