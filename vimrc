@@ -42,14 +42,14 @@ nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 " navigation
 noremap <Tab> :tabnext<CR>
 noremap <S-Tab> :tabprev<CR>
+noremap <Leader>b :ls<CR>:b<space>
 
 " fuzzy finder
 set rtp+=~/.fzf
-noremap <C-o> :FZF<CR>
+noremap <C-f> :FZF<CR>
 
 " nerdtree
 noremap <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeWinSize=50
 
 " status line
