@@ -4,24 +4,27 @@ filetype off
 " vundle plugins
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'junegunn/fzf.vim'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'tpope/vim-surround'
+
+Plugin 'morhetz/gruvbox'
 Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-surround'
+
 Plugin 'elzr/vim-json'
 Plugin 'stephpy/vim-yaml'
 Plugin 'fatih/vim-go'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'morhetz/gruvbox'
-Plugin 'junegunn/fzf.vim'
-Plugin 'ycm-core/YouCompleteMe'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-Plugin 'arnaud-lb/vim-php-namespace'
-Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'phpstan/vim-phpstan'
-Plugin 'phpactor/phpactor'
+if $VIM_PHP_SUPPORT
+    Plugin 'arnaud-lb/vim-php-namespace'
+    Plugin 'shawncplus/phpcomplete.vim'
+    Plugin 'phpstan/vim-phpstan'
+    Plugin 'phpactor/phpactor'
+endif
 call vundle#end()
 filetype plugin indent on
 
@@ -77,11 +80,13 @@ set number
 syntax on
 autocmd BufNewFile,BufRead *.twig set syntax=html
 
-" PHP
-function! IPhpInsertUse()
-    call PhpInsertUse()
-    call feedkeys('a',  'n')
-endfunction
-autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
-autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
-autocmd FileType php noremap <Leader>t :call phpactor#Transform()<CR>
+if $VIM_PHP_SUPPORT
+    function! IPhpInsertUse()
+        call PhpInsertUse()
+        call feedkeys('a',  'n')
+    endfunction
+   
+    autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+    autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+    autocmd FileType php noremap <Leader>t :call phpactor#Transform()<CR>
+endif
