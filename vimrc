@@ -12,6 +12,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'terryma/vim-multiple-cursors'
 
 Plugin 'morhetz/gruvbox'
+Plugin 'arzg/vim-colors-xcode'
 Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
 
@@ -32,17 +33,22 @@ filetype plugin indent on
 set encoding=utf-8
 
 " theme
-colorscheme gruvbox
-set background=dark
-let g:gruvbox_contrast_dark='hard'
+if $VIM_THEME_GRUVBOX
+    colorscheme gruvbox
+    set background=dark
+    let g:gruvbox_contrast_dark='hard'
 
-nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+    nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+    nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+    nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
 
-nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+    nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+    nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+    nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+else
+    colorscheme xcodedark
+    let g:xcodedark_green_comments=1
+endif
 
 " navigation
 noremap <Tab> :tabnext<CR>
