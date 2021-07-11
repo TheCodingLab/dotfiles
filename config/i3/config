@@ -7,7 +7,10 @@ exec --no-startup-id nm-applet
 exec --no-startup-id pulseaudio --deamonize
 
 exec --no-startup-id feh --bg-scale $HOME/Pictures/mountains.png
-exec --no-startup-id xrandr --output DP-2 --auto --right-of DP-4
+
+# Monitor Setup
+exec --no-startup-id xrandr --output DP-2 --auto --right-of DP-0 --primary
+workspace 1 output DP-2
 
 # Media Controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
