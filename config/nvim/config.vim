@@ -9,7 +9,8 @@ set number
 set noshowmode
 "" disable line wrapping
 set nowrap
-
+"" line wrap indicator
+set colorcolumn=120
 
 " NERDTree
 let g:NERDTreeWinSize=50
@@ -18,6 +19,16 @@ let g:NERDTreeWinSize=50
 """ autocmd VimEnter * wincmd p
 "" auto close if NERDTree is last opened window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+}
+EOF
 
 
 " shortcuts
