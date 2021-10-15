@@ -1,6 +1,10 @@
 set $mod Mod4
 #set $mod Mod1
-font pango:MesloLGS NF 8
+
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:MesloLGL Nerd Font Regular 8px
+
+default_border pixel
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
@@ -26,6 +30,8 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Terminal
 bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec alacritty -o window.class.instance=floating-alacritty
+for_window [class="Alacritty" instance="floating-alacritty"] floating enable
 
 # Quit Window
 bindsym $mod+q kill
@@ -136,5 +142,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
-    status_command i3status
+  status_command i3status-rs
+  tray_output none
 }
+
+# Applications
+assign [class="jetbrains-idea" instance="jetbrains-idea"] 1
+assign [class="jetbrains-goland" instance="jetbrains-goland"] 1
+for_window [class="1Password" instance="1password"] floating enable
+for_window [class="Spotify" instance="spotify"] floating enable
+for_window [class="Gnome-calculator" instance="gnome-calculator"] floating enable
