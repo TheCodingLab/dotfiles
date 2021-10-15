@@ -15,8 +15,7 @@ set colorcolumn=120
 " NERDTree
 let g:NERDTreeWinSize=50
 "" auto open NERDTree
-""" autocmd VimEnter * NERDTree
-""" autocmd VimEnter * wincmd p
+autocmd BufWinEnter * NERDTreeMirror
 "" auto close if NERDTree is last opened window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
