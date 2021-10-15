@@ -2,7 +2,7 @@
 
 nvim +PlugInstall +qall < /dev/tty
 
-if [ ! -f "$HOME/.fzf" ]; then
+if [ -d "$HOME/.fzf" ]; then
     pushd "$HOME/.fzf"
     ./install --no-update-rc
     popd
