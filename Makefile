@@ -1,3 +1,3 @@
 .PHONY: up
 up:
-	rcup -v -x Makefile -x README.md
+	rcup -v -x Makefile -x README.md -x LICENSE
