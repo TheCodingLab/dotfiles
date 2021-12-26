@@ -22,3 +22,5 @@ source $ZSH/oh-my-zsh.sh
 [[ -f "$HOME/.env" ]] && source "$HOME/.env"
 [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
+
+alias ls="ls -lv --color=auto --group-directories-first -I '.' -I '..'"
