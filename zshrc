@@ -21,6 +21,4 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 [[ -f "$HOME/.env" ]] && source "$HOME/.env"
 [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
-
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+[[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
