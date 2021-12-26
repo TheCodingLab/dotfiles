@@ -8,10 +8,11 @@ default_border pixel
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec --no-startup-id pulseaudio --deamonize
 
 exec --no-startup-id feh --bg-scale $HOME/Pictures/mountains.png
 exec --no-startup-id numlockx on
+
+exec --no-startup-id spotify
 
 # Media Controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -146,5 +147,5 @@ bar {
 assign [class="jetbrains-idea" instance="jetbrains-idea"] 1
 assign [class="jetbrains-goland" instance="jetbrains-goland"] 1
 for_window [class="1Password" instance="1password"] floating enable
-for_window [class="Spotify" instance="spotify"] floating enable
+for_window [class="Spotify" instance="spotify"] move scratchpad
 for_window [class="Gnome-calculator" instance="gnome-calculator"] floating enable
