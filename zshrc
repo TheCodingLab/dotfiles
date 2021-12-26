@@ -9,9 +9,11 @@ CASE_SENSITIVE=true
 DISABLE_UPDATE_PROMPT=true
 
 plugins=(
-    git
-    zsh-autosuggestions
-    gitignore
+  git
+  zsh-autosuggestions
+  gitignore
+  docker
+  docker-compose
 )
 
 source $ZSH/oh-my-zsh.sh
