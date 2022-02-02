@@ -1,79 +1,94 @@
+################
+# General      #
+################
+
+# set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 #set $mod Mod1
+
+# quit window
+bindsym $mod+Shift+q kill
+
+# search menu
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# reload config
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+
+################
+# Windows     ##
+################
 
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font pango:MesloLGL Nerd Font Regular 8px
 
 default_border pixel
 
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
+gaps inner 10
+gaps outer -5
 
-exec --no-startup-id feh --bg-scale $HOME/Pictures/mountains.png
-exec --no-startup-id numlockx on
+# hide borders when fullscreen
+smart_borders on
+# hide gaps when fullscreen
+smart_gaps on
 
-exec --no-startup-id spotify
 
-# Media Controls
+################
+# Terminal     #
+################
+
+set $terminal alacritty
+
+bindsym $mod+Return exec $terminal
+bindsym $mod+Shift+Return exec $terminal -o window.class.instance=floating-terminal
+for_window [instance="floating-terminal"] floating enable
+
+
+################
+# Applications #
+################
+assign [instance="jetbrains-idea"] 1
+assign [instance="jetbrains-goland"] 1
+
+for_window [instance="1password"] floating enable
+for_window [instance="gnome-calculator"] floating enable
+
+
+################
+# Audio        #
+################
+
+# volume control
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
+# player control
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl pause-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# Terminal
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty -o window.class.instance=floating-alacritty
-for_window [class="Alacritty" instance="floating-alacritty"] floating enable
+exec --no-startup-id spotify
+for_window [class="Spotify" instance="spotify"] move scratchpad
 
-# Quit Window
-bindsym $mod+q kill
 
-# Search Menu
-#bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+################
+# Screenshot   #
+################
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 
-# Focus 
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
 
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+################
+# Workspaces   #
+################
 
-# Move Window 
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# Layout
-bindsym $mod+h split h
-bindsym $mod+v split v
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
-
-# Workspaces
+# workspace names
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -84,6 +99,10 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+# select worksapce
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
 
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -96,6 +115,7 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
+# move window to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -107,19 +127,55 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# Scratchpad
+################
+# Layout       #
+################
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen toggle
+
+# floating
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
-# Update config
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
+# focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
-# Logout
-bindsym $mod+Shift+q exec "i3lock -i $HOME/Pictures/mountains_blurred.png -t"
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
-# Resize
+# move window
+# TODO write custom mode for this?
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+################
+# Resize       #
+################
+
+bindsym $mod+r mode "resize"
+
 mode "resize" {
     bindsym j resize shrink width 10 px or 10 ppt
     bindsym k resize grow height 10 px or 10 ppt
@@ -136,16 +192,41 @@ mode "resize" {
     bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
+
+################
+# Bar          #
+################
+
+bindsym $mod+Shift+m bar mode toggle
 
 bar {
+  i3bar_command i3bar
   status_command i3status-rs
+  position bottom
+
   tray_output none
+
+  colors {
+    background #1d1f21
+    statusline #F9FAF9
+    separator  #454947
+  }
 }
 
-# Applications
-assign [class="jetbrains-idea" instance="jetbrains-idea"] 1
-assign [class="jetbrains-goland" instance="jetbrains-goland"] 1
-for_window [class="1Password" instance="1password"] floating enable
-for_window [class="Spotify" instance="spotify"] move scratchpad
-for_window [class="Gnome-calculator" instance="gnome-calculator"] floating enable
+
+################
+# Other        #
+################
+
+# start network manager on startup
+exec --no-startup-id nm-applet
+
+# enable numlock on startup
+exec --no-startup-id numlockx on
+
+# set background wallpaper
+exec --no-startup-id feh --bg-scale $HOME/Pictures/mountains.png
+
+# lock screen
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i $HOME/Pictures/mountains_blurred.png -t --nofork
+bindsym $mod+Control+q exec --no-startup-id loginctl lock-session
