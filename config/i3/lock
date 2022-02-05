@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+IMAGE="/tmp/i3lock.png"
+if [ -f "$IMAGE" ]; then
+    rm "$IMAGE"
+fi
+
+ffmpeg -f x11grab -i :0 -vf boxblur=16 -frames:v 1 "$IMAGE" 
+
+i3lock -i "$IMAGE"
+rm "$IMAGE"
