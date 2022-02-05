@@ -170,6 +170,9 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# select parent
+bindsym $mod+a focus parent
+
 ################
 # Resize       #
 ################
@@ -230,3 +233,20 @@ exec --no-startup-id feh --bg-scale $HOME/Pictures/mountains.png
 # lock screen
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i $HOME/Pictures/mountains_blurred.png -t --nofork
 bindsym $mod+Control+q exec --no-startup-id loginctl lock-session
+
+
+################
+# Programming  #
+################
+
+set $prog_dir "/home/florian/dev/github.com/thecodinglab/finance"
+
+bindsym $mod+Shift+p \
+  [workspace=$ws1] kill; \
+  workspace $ws1; \
+  append_layout /home/florian/.config/i3/layouts/programming.json; \
+  exec "google-chrome-stable --new-window 'https://github.com/thecodinglab'"; \
+  exec gtk-launch syntevo-smartgit; \
+  exec gtk-launch jetbrains-idea; \
+  exec alacritty --working-directory $prog_dir; \
+  exec alacritty --working-directory $prog_dir;
