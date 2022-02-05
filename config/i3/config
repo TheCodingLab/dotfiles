@@ -75,6 +75,10 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id spotify
 for_window [class="Spotify" instance="spotify"] move scratchpad
 
+# switch output device
+bindsym $mod+Shift+F1 exec --no-startup-id "pactl set-default-sink 'alsa_output.usb-NAE_Technologies_Inc_R-5_PM-01.analog-stereo'"
+bindsym $mod+Shift+F2 exec --no-startup-id "pactl set-default-sink 'alsa_output.usb-SteelSeries_Arctis_Pro_Wireless-00.stereo-game'"
+
 
 ################
 # Screenshot   #
