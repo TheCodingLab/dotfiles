@@ -67,7 +67,8 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ border = \'rounded\' })<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next({ border = \'rounded\' })<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>p', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.cmd [[ autocmd BufWritePre <buffer> execute 'lua vim.lsp.buf.formatting_sync()' ]]
 end
 
 function M.on_attach(client, bufnr)
@@ -89,7 +90,6 @@ M.capabilities = capabilities
 
 local status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if not status_ok then
-  print('missing cmp_nvim_lsp')
   return M
 end
 
