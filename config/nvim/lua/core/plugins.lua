@@ -53,7 +53,6 @@ packer.startup {
     -- File explorer
     use {
       'kyazdani42/nvim-tree.lua',
-      cmd = 'NvimTreeToggle',
       config = function()
         require 'configs.nvim-tree'.config()
       end,
@@ -125,7 +124,7 @@ packer.startup {
     -- Completion engine
     use {
       'hrsh7th/nvim-cmp',
-      event = 'BufRead',
+      event = {'BufRead', 'BufNewFile'},
       config = function()
         require('configs.cmp').config()
       end,
