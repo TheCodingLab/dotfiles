@@ -49,6 +49,12 @@ packer.startup {
         require('configs.bufferline').config()
       end,
     }
+
+    -- Better buffer closing
+    use {
+      'moll/vim-bbye',
+      after = 'bufferline.nvim',
+    }
     
     -- File explorer
     use {
