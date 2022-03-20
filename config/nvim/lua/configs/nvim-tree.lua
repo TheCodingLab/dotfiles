@@ -51,10 +51,10 @@ function M.config()
     quit_on_open = false,
     hijack_cursor = true,
     hide_root_folder = true,
-    update_cwd = true,
+    update_cwd = false,
     update_focused_file = {
       enable = true,
-      update_cwd = true,
+      update_cwd = false,
       ignore_list = {},
     },
     diagnostics = {
