@@ -27,3 +27,5 @@ vim.opt.sidescrolloff = 8                           -- Number of columns to keep
 vim.opt.pumheight = 10                              -- Height of the pop up menu
 vim.opt.timeoutlen = 300                            -- Length of time to wait for a mapped sequence
 vim.opt.updatetime = 300                            -- Length of time to wait before triggering the plugin
+
+vim.opt.mouse = 'a'                                 -- Enable mouse support
