@@ -185,11 +185,6 @@ packer.startup {
       }
     }
 
-    -- vlang
-    use {
-      'thecodinglab/nvim-vlang',
-    }
-
     -- LSP enhancer
     use {
       'tami5/lspsaga.nvim',
@@ -268,6 +263,11 @@ packer.startup {
         require('configs.comment').config()
       end,
     }
+
+    local status_ok, user = pcall(require, "user.plugins")
+    if status_ok then
+      user.setup(use)
+    end
   end,
   config = {
     compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",

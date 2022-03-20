@@ -9,12 +9,9 @@ function M.config()
   local handlers = require('configs.lsp.handlers')
   handlers.setup()
 
-  local servers = { 'gopls', 'vlang' }
-  for _, lsp in pairs(servers) do
-    lspconfig[lsp].setup {
-      on_attach = handlers.on_attach,
-      capabilities = handlers.capabilities,
-    }
+  local status_ok, user = pcall(require, 'user.lsp.init')
+  if status_ok then
+    user.config()
   end
 end
 
