@@ -29,3 +29,9 @@ vim.opt.timeoutlen = 300                            -- Length of time to wait fo
 vim.opt.updatetime = 300                            -- Length of time to wait before triggering the plugin
 
 vim.opt.mouse = 'a'                                 -- Enable mouse support
+
+vim.opt.listchars = {
+  eol = '¬',
+  tab = '▸ ',
+  trail = '×',
+}

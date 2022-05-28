@@ -1,4 +1,4 @@
-local packer_status_ok, packer = pcall(require, "packer")
+local packer_status_ok, packer = pcall(require, 'packer')
 if not packer_status_ok then
   return
 end
@@ -12,12 +12,12 @@ packer.startup {
 
     -- Lua functions
     use {
-      "nvim-lua/plenary.nvim",
+      'nvim-lua/plenary.nvim',
     }
 
     -- Popup API
     use {
-      "nvim-lua/popup.nvim",
+      'nvim-lua/popup.nvim',
     }
 
     -- Boost startup time
@@ -130,7 +130,7 @@ packer.startup {
     -- Completion engine
     use {
       'hrsh7th/nvim-cmp',
-      event = {'BufRead', 'BufNewFile'},
+      -- event = {'BufRead', 'BufNewFile'},
       config = function()
         require('configs.cmp').config()
       end,
@@ -183,6 +183,11 @@ packer.startup {
         },
 
       }
+    }
+
+    -- EditorConfig
+    use {
+      'editorconfig/editorconfig-vim'
     }
 
     -- LSP enhancer
@@ -264,16 +269,16 @@ packer.startup {
       end,
     }
 
-    local status_ok, user = pcall(require, "user.plugins")
+    local status_ok, user = pcall(require, 'user.plugins')
     if status_ok then
       user.setup(use)
     end
   end,
   config = {
-    compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+    compile_path = vim.fn.stdpath 'config' .. '/lua/packer_compiled.lua',
     display = {
       open_fn = function()
-        return require("packer.util").float { border = "rounded" }
+        return require('packer.util').float { border = 'rounded' }
       end,
     },
     profile = {

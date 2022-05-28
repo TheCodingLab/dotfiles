@@ -6,30 +6,6 @@ function M.config()
     return
   end
 
-  vim.g.nvim_tree_indent_markers = 1
-
-  vim.g.nvim_tree_icons = {
-    default = "",
-    symlink = "",
-    git = {
-      deleted = "",
-      ignored = "◌",
-      renamed = "➜",
-      staged = "✓",
-      unmerged = "",
-      unstaged = "✗",
-      untracked = "★",
-    },
-    folder = {
-      default = "",
-      empty = "",
-      empty_open = "",
-      open = "",
-      symlink = "",
-      symlink_open = "",
-    },
-  }
-
   nvimtree.setup {
     filters = {
       dotfiles = false,
@@ -46,11 +22,8 @@ function M.config()
       "startify",
       "alpha",
     },
-    auto_close = true,
     open_on_tab = false,
-    quit_on_open = false,
     hijack_cursor = true,
-    hide_root_folder = true,
     update_cwd = false,
     update_focused_file = {
       enable = true,
@@ -70,8 +43,7 @@ function M.config()
       width = 50,
       height = 30,
       side = "left",
-      allow_resize = true,
-      hide_root_folder = false,
+      hide_root_folder = true,
       number = false,
       relativenumber = false,
       signcolumn = "yes",
@@ -81,12 +53,45 @@ function M.config()
       ignore = false,
       timeout = 500,
     },
-    show_icons = {
-      git = 1,
-      folders = 1,
-      files = 1,
-      folder_arrows = 0,
-      tree_width = 30,
+    renderer = {
+      group_empty = true,
+      indent_markers = {
+        enable = true,
+      },
+      icons = {
+        glyphs = {
+          default = "",
+          symlink = "",
+          git = {
+            deleted = "",
+            ignored = "◌",
+            renamed = "➜",
+            staged = "✓",
+            unmerged = "",
+            unstaged = "✗",
+            untracked = "★",
+          },
+          folder = {
+            default = "",
+            empty = "",
+            empty_open = "",
+            open = "",
+            symlink = "",
+            symlink_open = "",
+          },
+        },
+        show = {
+          file = true,
+          folder = true,
+          git = true,
+          folder_arrow = false,
+        },
+      },
+    },
+    actions = {
+      open_file = {
+        quit_on_open = true,
+      },
     },
   }
 end
