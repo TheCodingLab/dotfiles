@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+{{ if eq .chezmoi.os "linux" -}}
+
+PACKAGES="neovim"
+
+sudo pacman -S --needed $PACKAGES
+
+{{ else if eq .chezmoi.os "darwin" -}}
+
+PACKAGES="neovim"
+
+sudo port install $PACKAGES
+
+{{ end -}}

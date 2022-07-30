@@ -1,0 +1,235 @@
+################
+# General      #
+################
+
+# set mod key (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4
+#set $mod Mod1
+
+# quit window
+bindsym $mod+Shift+q kill
+
+# search menu
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# reload config
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# include machine local configurations
+include $HOME/.config/i3/local.conf
+
+
+################
+# Windows     ##
+################
+
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:MesloLGL Nerd Font Regular 8px
+
+default_border pixel
+
+gaps inner 10
+gaps outer -5
+
+# hide borders when fullscreen
+smart_borders on
+# hide gaps when fullscreen
+smart_gaps on
+
+
+################
+# Terminal     #
+################
+
+set $terminal alacritty
+
+bindsym $mod+Return exec $terminal
+bindsym $mod+Shift+Return exec $terminal -o window.class.instance=floating-terminal
+for_window [instance="floating-terminal"] floating enable
+
+
+################
+# Applications #
+################
+assign [instance="jetbrains-idea"] 1
+assign [instance="jetbrains-goland"] 1
+
+for_window [instance="1password"] floating enable
+for_window [instance="gnome-calculator"] floating enable
+
+
+################
+# Audio        #
+################
+
+# volume control
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# player control
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+exec --no-startup-id spotify
+for_window [class="Spotify" instance="spotify"] move scratchpad
+
+
+################
+# Screenshot   #
+################
+
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+
+
+################
+# Workspaces   #
+################
+
+# workspace names
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# select worksapce
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move window to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+################
+# Layout       #
+################
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen toggle
+
+# floating
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move window
+# TODO write custom mode for this?
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# select parent
+bindsym $mod+a focus parent
+
+################
+# Resize       #
+################
+
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+
+################
+# Bar          #
+################
+
+bindsym $mod+Shift+m bar mode toggle
+
+bar {
+  i3bar_command i3bar
+  status_command i3status-rs
+  position bottom
+
+  tray_output none
+
+  colors {
+    background #1d1f21
+    statusline #F9FAF9
+    separator  #454947
+  }
+}
+
+
+################
+# Other        #
+################
+
+# start network manager on startup
+exec --no-startup-id nm-applet
+
+# enable numlock on startup
+exec --no-startup-id numlockx on
+
+# lock screen
+exec --no-startup-id xss-lock --transfer-sleep-lock -- xsecurelock
+bindsym $mod+Control+q exec --no-startup-id loginctl lock-session
