@@ -41,19 +41,36 @@ function M.setup()
   })
 end
 
-local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-      false
-    )
+local function lsp_highlight_document(bufnr, client)
+  if client.server_capabilities.document_highlight then
+    local augroup = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
+
+    vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+      buffer = bufnr,
+      group = augroup,
+      callback = function()
+        vim.lsp.buf.document_highlight()
+      end,
+    })
+
+    vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+      buffer = bufnr,
+      group = augroup,
+      callback = function()
+        vim.lsp.buf.clear_references()
+      end,
+    })
   end
+end
+
+local function lsp_autoformat(bufnr)
+  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    buffer = bufnr,
+    group = vim.api.nvim_create_augroup('lsp_autoformat', { clear = true }),
+    callback = function()
+      vim.lsp.buf.formatting_sync()
+    end,
+  })
 end
 
 local function lsp_keymaps(bufnr)
@@ -68,21 +85,22 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next({ border = \'rounded\' })<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>p', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  vim.cmd [[ autocmd BufWritePre <buffer> execute 'lua vim.lsp.buf.formatting_sync()' ]]
 end
 
 function M.on_attach(client, bufnr)
   if client.name == 'tsserver' then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = false
   end
   if client.name == 'jsonls' then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = false
   end
   if client.name == 'html' then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = false
   end
+
   lsp_keymaps(bufnr)
-  lsp_highlight_document(client)
+  lsp_autoformat(bufnr)
+  lsp_highlight_document(bufnr, client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
