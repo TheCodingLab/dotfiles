@@ -8,7 +8,7 @@ sudo pacman -S --needed $PACKAGES
 
 {{ else if eq .chezmoi.os "darwin" -}}
 
-PACKAGES="neovim"
+PACKAGES="coreutils neovim"
 
 sudo port install $PACKAGES
 
