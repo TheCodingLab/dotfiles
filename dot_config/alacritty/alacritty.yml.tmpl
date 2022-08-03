@@ -5,7 +5,11 @@ scrolling:
   history: 100000
 
 font:
+{{- if eq .chezmoi.os "linux" }}
   size: 10.0
+{{- else }}
+  size: 12.0
+{{- end }}
   normal:
     family: MesloLGM NF
     style: Regular
@@ -15,3 +19,6 @@ live_config_reload: true
 key_bindings:
  - { key: K, mods: Control, mode: ~Vi|~Search, chars: "\x0c" }
  - { key: K, mods: Control, mode: ~Vi|~Search, action: ClearHistory }
+{{- if eq .chezmoi.os "darwin" }}
+ - { key: N, mods: Command,                    action: CreateNewWindow }
+{{- end }}
