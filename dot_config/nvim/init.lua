@@ -6,6 +6,7 @@ require('core.options')
 require('core.autocmd')
 require('core.plugins')
 require('core.mappings')
+require('core.ft')
 
 require('core.workspace').config()
 
