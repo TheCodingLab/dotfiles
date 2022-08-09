@@ -1,4 +1,6 @@
-local M = {}
+local M = {
+  initialized = false,
+}
 
 ---@return string|nil
 local function find_workspace_init()
@@ -14,7 +16,7 @@ local function find_workspace_init()
   return files[1]
 end
 
-function M.config()
+function M.init()
   local workspace_init = find_workspace_init()
   if not workspace_init then
     return
@@ -28,6 +30,14 @@ function M.config()
   package.path = package.path .. ';' .. lua_path
 
   M.workspace_dir = workspace_dir
+  M.initialized = true
+end
+
+function M.config()
+  if not M.initialized then
+    return
+  end
+
   M.workspace = require('workspace.init')
 end
 
