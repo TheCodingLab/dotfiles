@@ -13,8 +13,9 @@ map('n', '<Leader>p', '"+p', opts)
 map('v', '<Leader>p', '"+p', opts)
 
 -- Buffer navigation
-map('n', '<Tab>', '<cmd>bnext<CR>', opts)
-map('n', '<S-Tab>', '<cmd>bprevious<CR>', opts)
+map('n', '<Tab>', '<cmd>BufferLineCycleNext<CR>', opts)
+map('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', opts)
+
 
 -- Telescope
 map('n', '<C-f>', '<cmd>Telescope find_files<CR>', opts)
