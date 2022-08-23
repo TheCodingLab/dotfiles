@@ -4,8 +4,7 @@ local function gopls()
   local config = {
     cmd = { lsp_server_path .. '/go/gopls', 'serve' },
     settings = {
-      gopls = {
-      },
+      gopls = {},
     },
   }
 
@@ -18,5 +17,8 @@ local function gopls()
 end
 
 return {
+  clangd = {
+    cmd = { lsp_server_path .. '/clangd/clangd/bin/clangd' },
+  },
   gopls = gopls(),
 }
