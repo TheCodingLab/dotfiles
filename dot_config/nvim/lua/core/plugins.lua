@@ -55,7 +55,7 @@ packer.startup {
       'moll/vim-bbye',
       after = 'bufferline.nvim',
     }
-    
+
     -- File explorer
     use {
       'kyazdani42/nvim-tree.lua',
@@ -162,9 +162,6 @@ packer.startup {
         'LspInstall',
         'LspInstallInfo',
         'LspPrintInstalled',
-        'LspRestart',
-        'LspStart',
-        'LspStop',
         'LspUninstall',
         'LspUninstallAll',
       },
@@ -193,7 +190,7 @@ packer.startup {
     -- LSP enhancer
     use {
       'tami5/lspsaga.nvim',
-      event = {'BufRead', 'BufNewFile'},
+      event = { 'BufRead', 'BufNewFile' },
       config = function()
         require('configs.lsp.lspsaga').config()
       end,
@@ -220,7 +217,7 @@ packer.startup {
     -- Formatting and linting
     use {
       'jose-elias-alvarez/null-ls.nvim',
-      event = {'BufRead', 'BufNewFile'},
+      event = { 'BufRead', 'BufNewFile' },
       config = function()
         require 'configs.null-ls'.config()
       end,
@@ -248,6 +245,18 @@ packer.startup {
       config = function()
         require('configs.gitsigns').config()
       end,
+    }
+
+    -- Test coverage
+    use {
+      'andythigpen/nvim-coverage',
+      requires = 'nvim-lua/plenary.nvim',
+      after = {
+        'onedark.nvim' -- theme uses `hi clear` to remove all highlights
+      },
+      config = function()
+        require('configs.coverage').config()
+      end
     }
 
     -- Color highlighting
