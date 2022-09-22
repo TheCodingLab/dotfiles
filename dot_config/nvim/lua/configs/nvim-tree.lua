@@ -41,7 +41,6 @@ function M.config()
     },
     view = {
       width = 50,
-      height = 30,
       side = "left",
       hide_root_folder = true,
       number = false,
