@@ -17,6 +17,10 @@ end
 
 ---@return string|nil
 function M.find_module_file()
+  if not vim.fs then
+    return nil
+  end
+
   local files = vim.fs.find({ 'go.mod' }, {
     upward = true,
   })

@@ -4,6 +4,10 @@ local M = {
 
 ---@return string|nil
 local function find_workspace_init()
+  if not vim.fs then
+    return nil
+  end
+
   local files = vim.fs.find({ '.nvim/workspace/init.lua' }, {
     upward = true,
   })
