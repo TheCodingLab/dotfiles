@@ -18,18 +18,19 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+[[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
 
+# enable completions
+autoload -Uz compinit && compinit
+
+# better default ls properties
 {{- if eq .chezmoi.os "darwin" }}
 LS_CMD="gls"
 {{- else }}
 LS_CMD="ls"
 {{- end }}
-
 alias ls="$LS_CMD -lv --color=auto --group-directories-first -I '.' -I '..'"
-
-# enable completions
-autoload -Uz compinit && compinit
+alias l="ls"
 
 # User configuration
 [[ -f "$HOME/.env" ]] && source "$HOME/.env"
-[[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
