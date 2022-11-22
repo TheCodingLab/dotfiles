@@ -6,8 +6,8 @@ function M.config()
     return
   end
 
-  local actions = require 'telescope.actions'
-  telescope.load_extension 'fzf'
+  local actions = require('telescope.actions')
+  telescope.load_extension('fzf')
 
   vim.api.nvim_create_autocmd('BufRead', {
     callback = function()
@@ -32,7 +32,7 @@ function M.config()
       end
 
       if stat.size > max_size then
-        local cmd = { "head", "-c", max_size, filepath }
+        local cmd = { 'head', '-c', max_size, filepath }
         previewers_utils.job_maker(cmd, bufnr, opts)
       else
         previewers.buffer_previewer_maker(filepath, bufnr, opts)

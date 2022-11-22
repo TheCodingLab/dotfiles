@@ -11,8 +11,10 @@ function M.config()
   local handlers = require('configs.lsp.handlers')
   handlers.setup()
 
-  local enabled_servers = {}
-  local config = require('configs.lsp.defaults')
+  local defaults = require('configs.lsp.defaults')
+
+  local enabled_servers = defaults.enabled_servers
+  local config = defaults.config
 
   local status_ok, user_config = pcall(require, 'user.lsp.config')
   if status_ok then
@@ -23,11 +25,6 @@ function M.config()
     if user_config.config then
       config = table_util.merge(config, user_config.config)
     end
-  end
-
-  local status_ok, workspace_config = pcall(require, 'workspace.lsp.config')
-  if status_ok and workspace_config then
-    config = table_util.merge(config, workspace_config)
   end
 
   for _, lsp in pairs(enabled_servers) do

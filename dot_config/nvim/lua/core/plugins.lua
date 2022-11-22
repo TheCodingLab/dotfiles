@@ -1,3 +1,19 @@
+-- Automaticaly install packer
+local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  PACKER_BOOTSTRAP = vim.fn.system {
+    'git',
+    'clone',
+    '--depth',
+    '1',
+    'https://github.com/wbthomason/packer.nvim',
+    install_path,
+  }
+
+  print 'Cloning packer...'
+  vim.cmd [[packadd packer.nvim]]
+end
+
 local packer_status_ok, packer = pcall(require, 'packer')
 if not packer_status_ok then
   return
@@ -5,43 +21,20 @@ end
 
 packer.startup {
   function(use)
-    -- Package manager
-    use {
-      'wbthomason/packer.nvim'
-    }
+    -- general
+    use { 'wbthomason/packer.nvim' }
 
-    -- Lua functions
-    use {
-      'nvim-lua/plenary.nvim',
-    }
+    use { 'nvim-lua/plenary.nvim' }
+    use { 'lewis6991/impatient.nvim' }
+    use { 'moll/vim-bbye' }
 
-    -- Popup API
     use {
-      'nvim-lua/popup.nvim',
-    }
-
-    -- Boost startup time
-    use {
-      'nathom/filetype.nvim',
+      'kyazdani42/nvim-tree.lua',
       config = function()
-        vim.g.did_load_filetypes = 1
+        require 'configs.nvim-tree'.config()
       end,
     }
 
-    -- Theme
-    use {
-      'navarasu/onedark.nvim',
-      config = function()
-        require('configs.theme').config()
-      end,
-    }
-
-    -- Icons
-    use {
-      'kyazdani42/nvim-web-devicons'
-    }
-
-    -- Bufferline
     use {
       'akinsho/bufferline.nvim',
       after = 'nvim-web-devicons',
@@ -50,21 +43,6 @@ packer.startup {
       end,
     }
 
-    -- Better buffer closing
-    use {
-      'moll/vim-bbye',
-      after = 'bufferline.nvim',
-    }
-
-    -- File explorer
-    use {
-      'kyazdani42/nvim-tree.lua',
-      config = function()
-        require 'configs.nvim-tree'.config()
-      end,
-    }
-
-    -- Statusline
     use {
       'nvim-lualine/lualine.nvim',
       after = 'bufferline.nvim',
@@ -73,157 +51,92 @@ packer.startup {
       end,
     }
 
-    -- Syntax highlighting
     use {
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
-      event = 'BufRead',
-      cmd = {
-        'TSInstall',
-        'TSInstallInfo',
-        'TSInstallSync',
-        'TSUninstall',
-        'TSUpdate',
-        'TSUpdateSync',
-        'TSDisableAll',
-        'TSEnableAll',
-      },
+      'lewis6991/gitsigns.nvim',
       config = function()
-        require('configs.treesitter').config()
-      end,
-      requires = {
-        {
-          -- Parenthesis highlighting
-          'p00f/nvim-ts-rainbow',
-          after = 'nvim-treesitter',
-        },
-        {
-          -- Autoclose tags
-          'windwp/nvim-ts-autotag',
-          after = 'nvim-treesitter',
-        },
-        {
-          -- Context based commenting
-          'JoosepAlviste/nvim-ts-context-commentstring',
-          after = 'nvim-treesitter',
-        },
-      },
-    }
-
-    -- Snippet engine
-    use {
-      'L3MON4D3/LuaSnip',
-      config = function()
-        local status_ok, luasnip = pcall(require, 'luasnip/loaders/from_vscode')
-        if not status_ok then
-          return
-        end
-
-        luasnip.lazy_load()
-      end,
-      requires = {
-        -- Snippet collections
-        'rafamadriz/friendly-snippets',
-      },
-    }
-
-    -- Completion engine
-    use {
-      'hrsh7th/nvim-cmp',
-      -- event = {'BufRead', 'BufNewFile'},
-      config = function()
-        require('configs.cmp').config()
+        require('configs.gitsigns').config()
       end,
     }
 
-    -- Snippet completion source
     use {
-      'saadparwaiz1/cmp_luasnip',
-      after = 'nvim-cmp',
+      'windwp/nvim-autopairs',
+      config = function()
+        require('configs.autopairs').config()
+      end,
     }
 
-    -- Buffer completion source
+    -- commenting
     use {
-      'hrsh7th/cmp-buffer',
-      after = 'nvim-cmp',
+      'numToStr/Comment.nvim',
+      config = function()
+        require('configs.comment').config()
+      end,
     }
 
-    -- Path completion source
-    use {
-      'hrsh7th/cmp-path',
-      after = 'nvim-cmp',
-    }
+    use { 'JoosepAlviste/nvim-ts-context-commentstring' }
 
-    -- LSP manager
-    use {
-      'williamboman/nvim-lsp-installer',
-      event = 'BufRead',
-      cmd = {
-        'LspInstall',
-        'LspInstallInfo',
-        'LspPrintInstalled',
-        'LspUninstall',
-        'LspUninstallAll',
-      },
-    }
-
-    -- Built-in LSP
+    -- language server protocol
     use {
       'neovim/nvim-lspconfig',
       config = function()
         require('configs.lsp.init').config()
       end,
-      requires = {
-        -- LSP completion source
-        use {
-          'hrsh7th/cmp-nvim-lsp',
-        },
-
-      }
     }
 
-    -- EditorConfig
     use {
-      'editorconfig/editorconfig-vim'
+      'williamboman/mason.nvim',
+      config = function()
+        require('configs.lsp.mason').config()
+      end,
     }
 
-    -- LSP enhancer
+    use {
+      'jose-elias-alvarez/null-ls.nvim',
+      config = function()
+        require('configs.null-ls').config()
+      end,
+    }
+
     use {
       'tami5/lspsaga.nvim',
-      event = { 'BufRead', 'BufNewFile' },
       config = function()
         require('configs.lsp.lspsaga').config()
       end,
     }
 
-    -- LSP Diagnostics
     use {
       'folke/trouble.nvim',
-      requires = { 'neovim/nvim-lspconfig' },
       config = function()
         require 'configs.lsp.trouble'.config()
       end,
     }
 
-    -- LSP symbols
-    use {
-      'simrat39/symbols-outline.nvim',
-      cmd = 'SymbolsOutline',
-      setup = function()
-        require('configs.symbols-outline').setup()
-      end,
-    }
+    use { 'williamboman/mason-lspconfig.nvim' }
 
-    -- Formatting and linting
+    -- snippets engine
     use {
-      'jose-elias-alvarez/null-ls.nvim',
-      event = { 'BufRead', 'BufNewFile' },
+      'L3MON4D3/LuaSnip',
       config = function()
-        require 'configs.null-ls'.config()
+        require('configs.luasnip').config()
       end,
     }
 
-    -- Fuzzy finder
+    use { 'rafamadriz/friendly-snippets' }
+
+    -- completion engine
+    use {
+      'hrsh7th/nvim-cmp',
+      config = function()
+        require('configs.cmp').config()
+      end,
+    }
+
+    use { 'saadparwaiz1/cmp_luasnip' }
+    use { 'hrsh7th/cmp-buffer' }
+    use { 'hrsh7th/cmp-path' }
+    use { 'hrsh7th/cmp-nvim-lsp' }
+
+    -- telescope (fuzzy finder)
     use {
       'nvim-telescope/telescope.nvim',
       cmd = 'Telescope',
@@ -232,66 +145,41 @@ packer.startup {
       end,
     }
 
-    -- Fuzzy finder syntax support
-    use {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      run = 'make',
-    }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-    -- Git integration
+    -- treesitter
     use {
-      'lewis6991/gitsigns.nvim',
-      event = 'BufRead',
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
       config = function()
-        require('configs.gitsigns').config()
+        require('configs.treesitter').config()
       end,
     }
 
-    -- Test coverage
-    use {
-      'andythigpen/nvim-coverage',
-      requires = 'nvim-lua/plenary.nvim',
-      after = {
-        'onedark.nvim' -- theme uses `hi clear` to remove all highlights
-      },
-      config = function()
-        require('configs.coverage').config()
-      end
-    }
+    use { 'p00f/nvim-ts-rainbow' }
+    use { 'windwp/nvim-ts-autotag' }
 
-    -- Color highlighting
-    -- use {
-    --   'norcalli/nvim-colorizer.lua',
-    --   event = 'BufRead',
-    --   config = function()
-    --     require('configs.colorizer').config()
-    --   end,
-    --   disable = not configs.enabled.colorizer,
-    -- }
-
-    -- Autopairs
+    -- theme
+    use { 'kyazdani42/nvim-web-devicons' }
     use {
-      'windwp/nvim-autopairs',
-      event = 'InsertEnter',
+      'navarasu/onedark.nvim',
       config = function()
-        require('configs.autopairs').config()
+        require('configs.theme').config()
       end,
     }
 
-    -- Commenting
-    use {
-      'numToStr/Comment.nvim',
-      event = 'BufRead',
-      config = function()
-        require('configs.comment').config()
-      end,
-    }
-
+    -- user local plugins
     local status_ok, user = pcall(require, 'user.plugins')
     if status_ok then
       user.setup(use)
     end
+
+    -- install plugins automatically when first starting neovim
+    if PACKER_BOOTSTRAP then
+      require('packer').sync()
+    end
   end,
+
   config = {
     compile_path = vim.fn.stdpath 'config' .. '/lua/packer_compiled.lua',
     display = {

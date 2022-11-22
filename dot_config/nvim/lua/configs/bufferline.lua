@@ -16,14 +16,14 @@ function M.config()
 
   bufferline.setup {
     options = {
-      offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+      offsets = { { filetype = 'NvimTree', text = '', padding = 1 } },
 
-      modified_icon = "",
-      left_trunc_marker = "",
-      right_trunc_marker = "",
+      modified_icon = '',
+      left_trunc_marker = '',
+      right_trunc_marker = '',
 
-      view = "multiwindow",
-      separator_style = "thin",
+      view = 'multiwindow',
+      separator_style = 'thin',
       max_name_length = 14,
       max_prefix_length = 13,
       tab_size = 20,

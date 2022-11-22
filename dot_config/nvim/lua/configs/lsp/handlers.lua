@@ -59,13 +59,15 @@ local function lsp_highlight_document(client)
   end
 end
 
-local function lsp_autoformat()
-  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-    group = vim.api.nvim_create_augroup('lsp_autoformat', { clear = true }),
-    callback = function()
-      vim.lsp.buf.format()
-    end,
-  })
+local function lsp_autoformat(client)
+  if client.server_capabilities.documentFormattingProvider then
+    vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+      group = vim.api.nvim_create_augroup('lsp_autoformat', { clear = true }),
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
+  end
 end
 
 local function lsp_keymaps(bufnr)
@@ -78,7 +80,7 @@ end
 
 function M.on_attach(client, bufnr)
   lsp_keymaps(bufnr)
-  lsp_autoformat()
+  lsp_autoformat(client)
   lsp_highlight_document(client)
 end
 
@@ -90,6 +92,6 @@ if not status_ok then
   return M
 end
 
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 return M
