@@ -24,8 +24,7 @@ include $HOME/.config/i3/local.conf
 # Windows     ##
 ################
 
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:MesloLGL Nerd Font Regular 8px
+font pango:SauceCodePro Nerd Font 12px
 
 default_border pixel
 
@@ -206,10 +205,12 @@ mode "resize" {
 bindsym $mod+Shift+m bar mode toggle
 
 bar {
+  font pango:SauceCodePro Nerd Font 12px
+
   i3bar_command i3bar
   status_command i3status-rs
-  position bottom
 
+  position top
   tray_output none
 
   colors {
