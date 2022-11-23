@@ -29,12 +29,7 @@ font pango:SauceCodePro Nerd Font 12px
 default_border pixel
 
 gaps inner 10
-gaps outer -5
-
-# hide borders when fullscreen
-smart_borders on
-# hide gaps when fullscreen
-smart_gaps on
+gaps outer 5
 
 
 ################
@@ -43,8 +38,8 @@ smart_gaps on
 
 set $terminal alacritty
 
-bindsym $mod+Return exec $terminal
-bindsym $mod+Shift+Return exec $terminal -o window.class.instance=floating-terminal
+bindsym $mod+Return exec --no-startup-id $terminal
+bindsym $mod+Shift+Return exec --no-startup-id $terminal -o window.class.instance=floating-terminal
 for_window [instance="floating-terminal"] floating enable
 
 
@@ -69,10 +64,10 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # player control
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl pause-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl pause-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 exec --no-startup-id spotify
 for_window [class="Spotify" instance="spotify"] move scratchpad
@@ -82,9 +77,7 @@ for_window [class="Spotify" instance="spotify"] move scratchpad
 # Screenshot   #
 ################
 
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
-
+bindsym --release $mod+Print exec "scrot -u -e 'xclip -selection clipboard -t image/png -i $f'"
 
 ################
 # Workspaces   #
