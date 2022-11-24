@@ -1,3 +1,8 @@
+{{ $fontsDir := ".fonts" -}}
+{{ if eq .chezmoi.os "darwin" -}}
+  {{ $fontsDir = "Library/Fonts" -}}
+{{ end -}}
+
 [".oh-my-zsh"]
   type = "archive"
   url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
@@ -15,15 +20,16 @@
   url = "https://github.com/romkatv/powerlevel10k/archive/v1.16.1.tar.gz"
   exact = true
   stripComponents = 1
-[".fonts/JetBrainsMono"]
+
+["{{ $fontsDir }}/JetBrainsMono"]
   type = "archive"
   url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
   exact = true
-[".fonts/Meslo"]
+["{{ $fontsDir }}/Meslo"]
   type = "archive"
   url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip"
   exact = true
-[".fonts/SourceCodePro"]
+["{{ $fontsDir }}/SourceCodePro"]
   type = "archive"
   url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/SourceCodePro.zip"
   exact = true
