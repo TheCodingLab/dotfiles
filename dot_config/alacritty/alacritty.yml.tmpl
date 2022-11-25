@@ -20,8 +20,8 @@ key_bindings:
  - { key: K,      mods: Control,       mode: ~Vi|~Search, chars: "\x0c" }
  - { key: K,      mods: Control,       mode: ~Vi|~Search, action: ClearHistory }
 {{- if eq .chezmoi.os "darwin" }}
- - { key: N,      mods: Command,                          action: CreateNewWindow }
- - { key: N,      mods: Command|Shift,                    action: SpawnNewInstance }
+ - { key: N,      mods: Command|Shift,                    action: CreateNewWindow }
+ - { key: N,      mods: Command|Control,                  action: SpawnNewInstance }
  - { key: Left,   mods: Alt,                              chars: "\x1bb" }
  - { key: Right,  mods: Alt,                              chars: "\x1bf" }
 {{- end }}
