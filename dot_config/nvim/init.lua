@@ -9,3 +9,8 @@ local compiled_ok, _ = pcall(require, 'packer_compiled')
 if compiled_ok then
   require('packer_compiled')
 end
+
+local workspace = require('util.workspace')
+workspace.setup()
+
+require('configs.lsp.init').config()

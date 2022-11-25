@@ -1,0 +1,27 @@
+local runtime_path = vim.split(package.path, ';')
+
+return {
+  enabled_servers = { 'sumneko_lua' },
+  config = {
+    sumneko_lua = {
+      settings = {
+        Lua = {
+          runtime = {
+            version = 'LuaJIT',
+            path = runtime_path,
+          },
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file("", true),
+            checkThirdParty = false,
+          },
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
+    },
+  },
+}

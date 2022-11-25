@@ -31,7 +31,7 @@ packer.startup {
     use {
       'kyazdani42/nvim-tree.lua',
       config = function()
-        require 'configs.nvim-tree'.config()
+        require('configs.nvim-tree').config()
       end,
     }
 
@@ -76,12 +76,7 @@ packer.startup {
     use { 'JoosepAlviste/nvim-ts-context-commentstring' }
 
     -- language server protocol
-    use {
-      'neovim/nvim-lspconfig',
-      config = function()
-        require('configs.lsp.init').config()
-      end,
-    }
+    use { 'neovim/nvim-lspconfig' }
 
     use {
       'williamboman/mason.nvim',

@@ -31,6 +31,10 @@ end
 
 function M.merge(...)
   local tables_to_merge = { ... }
+  if #tables_to_merge == 1 then
+    return tables_to_merge[1]
+  end
+
   assert(#tables_to_merge > 1, "there should be at least two tables to merge them")
 
   for k, t in ipairs(tables_to_merge) do
