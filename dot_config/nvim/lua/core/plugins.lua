@@ -108,6 +108,14 @@ packer.startup {
 
     use { 'williamboman/mason-lspconfig.nvim' }
 
+    -- debugging
+    use {
+      'mfussenegger/nvim-dap',
+      config = function()
+        require('configs.dap').config()
+      end,
+    }
+
     -- snippets engine
     use {
       'L3MON4D3/LuaSnip',

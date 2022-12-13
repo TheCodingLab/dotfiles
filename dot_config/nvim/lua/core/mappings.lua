@@ -43,3 +43,12 @@ map('v', '<leader>/', '<esc><cmd>lua require(\'Comment.api\').toggle.linewise(vi
 -- Indent & stay in visual mode
 map('v', '<', '<gv', opts)
 map('v', '>', '>gv', opts)
+
+-- Debugging
+map('n', '<F5>', '<cmd>lua require(\'dap\').continue()<CR>', opts)
+map('n', '<F10>', '<cmd>lua require(\'dap\').step_over()<CR>', opts)
+map('n', '<F11>', '<cmd>lua require(\'dap\').step_into()<CR>', opts)
+map('n', '<F12>', '<cmd>lua require(\'dap\').step_out()<CR>', opts)
+map('n', '<Leader>b', '<cmd>lua require(\'dap\').toggle_breakpoint()<CR>', opts)
+map('n', '<Leader>dr', '<cmd>lua require(\'dap\').repl.open()<CR>', opts)
+map('n', '<Leader>dl', '<cmd>lua require(\'dap\').run_last()<CR>', opts)
