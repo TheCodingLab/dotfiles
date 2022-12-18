@@ -193,11 +193,10 @@ mode "resize" {
 ################
 
 bar {
-  mode hide
-  modifier none
+  i3bar_command /usr/bin/true
 }
 
-exec --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 ################
 # Other        #
