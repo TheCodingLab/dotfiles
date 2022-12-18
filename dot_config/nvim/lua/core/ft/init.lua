@@ -1,1 +1,1 @@
-require('core.ft.go').config()
+require('core.ft.go')

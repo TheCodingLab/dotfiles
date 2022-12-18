@@ -28,111 +28,36 @@ packer.startup {
     use { 'lewis6991/impatient.nvim' }
     use { 'moll/vim-bbye' }
 
-    use {
-      'kyazdani42/nvim-tree.lua',
-      config = function()
-        require('configs.nvim-tree').config()
-      end,
-    }
+    use { 'kyazdani42/nvim-tree.lua' }
 
-    use {
-      'akinsho/bufferline.nvim',
-      after = 'nvim-web-devicons',
-      config = function()
-        require('configs.bufferline').config()
-      end,
-    }
+    use { 'akinsho/bufferline.nvim' }
+    use { 'nvim-lualine/lualine.nvim' }
 
-    use {
-      'nvim-lualine/lualine.nvim',
-      after = 'bufferline.nvim',
-      config = function()
-        require('configs.lualine').config()
-      end,
-    }
+    use { 'lewis6991/gitsigns.nvim' }
 
-    use {
-      'lewis6991/gitsigns.nvim',
-      config = function()
-        require('configs.gitsigns').config()
-      end,
-    }
-
-    use {
-      'windwp/nvim-autopairs',
-      config = function()
-        require('configs.autopairs').config()
-      end,
-    }
+    use { 'windwp/nvim-autopairs' }
 
     -- commenting
-    use {
-      'numToStr/Comment.nvim',
-      config = function()
-        require('configs.comment').config()
-      end,
-    }
-
+    use { 'numToStr/Comment.nvim' }
     use { 'JoosepAlviste/nvim-ts-context-commentstring' }
 
     -- language server protocol
     use { 'neovim/nvim-lspconfig' }
-
-    use {
-      'williamboman/mason.nvim',
-      config = function()
-        require('configs.lsp.mason').config()
-      end,
-    }
-
-    use {
-      'jose-elias-alvarez/null-ls.nvim',
-      config = function()
-        require('configs.null-ls').config()
-      end,
-    }
-
-    use {
-      'tami5/lspsaga.nvim',
-      config = function()
-        require('configs.lsp.lspsaga').config()
-      end,
-    }
-
-    use {
-      'folke/trouble.nvim',
-      config = function()
-        require 'configs.lsp.trouble'.config()
-      end,
-    }
-
+    use { 'williamboman/mason.nvim' }
     use { 'williamboman/mason-lspconfig.nvim' }
 
+    use { 'tami5/lspsaga.nvim' }
+    use { 'folke/trouble.nvim' }
+
     -- debugging
-    use {
-      'mfussenegger/nvim-dap',
-      config = function()
-        require('configs.dap').config()
-      end,
-    }
+    use { 'mfussenegger/nvim-dap' }
 
     -- snippets engine
-    use {
-      'L3MON4D3/LuaSnip',
-      config = function()
-        require('configs.luasnip').config()
-      end,
-    }
-
+    use { 'L3MON4D3/LuaSnip' }
     use { 'rafamadriz/friendly-snippets' }
 
     -- completion engine
-    use {
-      'hrsh7th/nvim-cmp',
-      config = function()
-        require('configs.cmp').config()
-      end,
-    }
+    use { 'hrsh7th/nvim-cmp' }
 
     use { 'saadparwaiz1/cmp_luasnip' }
     use { 'hrsh7th/cmp-buffer' }
@@ -140,36 +65,17 @@ packer.startup {
     use { 'hrsh7th/cmp-nvim-lsp' }
 
     -- telescope (fuzzy finder)
-    use {
-      'nvim-telescope/telescope.nvim',
-      cmd = 'Telescope',
-      config = function()
-        require('configs.telescope').config()
-      end,
-    }
-
+    use { 'nvim-telescope/telescope.nvim' }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- treesitter
-    use {
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
-      config = function()
-        require('configs.treesitter').config()
-      end,
-    }
-
-    use { 'p00f/nvim-ts-rainbow' }
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use { 'nvim-treesitter/playground' }
     use { 'windwp/nvim-ts-autotag' }
 
     -- theme
     use { 'kyazdani42/nvim-web-devicons' }
-    use {
-      'navarasu/onedark.nvim',
-      config = function()
-        require('configs.theme').config()
-      end,
-    }
+    use { 'navarasu/onedark.nvim' }
 
     -- user local plugins
     local status_ok, user = pcall(require, 'user.plugins')

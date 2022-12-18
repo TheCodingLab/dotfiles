@@ -10,7 +10,22 @@ if compiled_ok then
   require('packer_compiled')
 end
 
-local workspace = require('util.workspace')
-workspace.setup()
+require('core.theme')
 
-require('configs.lsp.init').config()
+require('util.workspace').init()
+
+require('configs.nvim-tree')
+require('configs.bufferline')
+require('configs.lualine')
+
+require('configs.autopairs')
+require('configs.comment')
+
+require('configs.treesitter')
+require('configs.lsp')
+
+require('configs.cmp')
+require('configs.luasnip')
+
+require('configs.dap')
+require('configs.telescope')

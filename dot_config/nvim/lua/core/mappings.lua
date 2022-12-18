@@ -1,54 +1,51 @@
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = '\\'
 
-local opts = { noremap = true, silent = true }
-
-local map = vim.api.nvim_set_keymap
-
-map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', opts)
+vim.keymap.set('n', '<C-n>', vim.cmd.NvimTreeToggle)
 
 -- Clipboard
-map('v', '<Leader>y', '"+y', opts)
-map('n', '<Leader>p', '"+p', opts)
-map('v', '<Leader>p', '"+p', opts)
+vim.keymap.set('v', '<Leader>y', '"+y')
+vim.keymap.set('n', '<Leader>p', '"+p')
+vim.keymap.set('v', '<Leader>p', '"+p')
 
 -- Buffer navigation
-map('n', '<Tab>', '<cmd>BufferLineCycleNext<CR>', opts)
-map('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', opts)
+vim.keymap.set('n', '<Tab>', vim.cmd.BufferLineCycleNext)
+vim.keymap.set('n', '<S-Tab>', vim.cmd.BufferLineCyclePrev)
 
 
 -- Telescope
-map('n', '<C-f>', '<cmd>Telescope find_files<CR>', opts)
-map('n', '<C-e>', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', opts)
+vim.keymap.set('n', '<C-f>', '<cmd>Telescope find_files<CR>')
+vim.keymap.set('n', '<C-e>', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>')
 
 -- replaces mappings from `configs/lsp/handlers.lua`
-map('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
-map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
-map('n', '<leader>p', '<cmd>Telescope diagnostics<CR>', opts)
+vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>')
+vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
+vim.keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
+vim.keymap.set('n', '<leader>p', '<cmd>Telescope diagnostics<CR>')
 
 -- Lspsaga
-map('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
-map('n', 'ca', '<cmd>Lspsaga code_action<CR>', opts)
-map('n', 'rn', '<cmd>Lspsaga rename<CR>', opts)
-map('n', 'gj', '<cmd>Lspsaga diagnostic_jump_next<CR>', opts)
-map('n', 'gk', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
-map('n', '<C-u>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<CR>', opts)
-map('n', '<C-d>', '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<CR>', opts)
+vim.keymap.set('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>')
+vim.keymap.set('n', 'ca', '<cmd>Lspsaga code_action<CR>')
+vim.keymap.set('v', 'ca', "<ESC><cmd>lua require('lspsaga.codeaction').range_code_action()<CR>")
+vim.keymap.set('n', 'rn', '<cmd>Lspsaga rename<CR>')
+vim.keymap.set('n', 'gj', '<cmd>Lspsaga diagnostic_jump_next<CR>')
+vim.keymap.set('n', 'gk', '<cmd>Lspsaga diagnostic_jump_prev<CR>')
+vim.keymap.set('n', '<C-u>', function() require('lspsaga.action').smart_scroll_with_saga(-1) end)
+vim.keymap.set('n', '<C-d>', function() require('lspsaga.action').smart_scroll_with_saga(1) end)
 
 -- Comment
-map('n', '<leader>/', '<cmd>lua require(\'Comment.api\').toggle.linewise()<CR>', opts)
-map('v', '<leader>/', '<esc><cmd>lua require(\'Comment.api\').toggle.linewise(vim.fn.visualmode())<CR>', opts)
+vim.keymap.set('n', '<leader>/', '<cmd>lua require(\'Comment.api\').toggle.linewise()<CR>')
+vim.keymap.set('v', '<leader>/', '<esc><cmd>lua require(\'Comment.api\').toggle.linewise(vim.fn.visualmode())<CR>')
 
 -- Indent & stay in visual mode
-map('v', '<', '<gv', opts)
-map('v', '>', '>gv', opts)
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
 
 -- Debugging
-map('n', '<F5>', '<cmd>lua require(\'dap\').continue()<CR>', opts)
-map('n', '<F10>', '<cmd>lua require(\'dap\').step_over()<CR>', opts)
-map('n', '<F11>', '<cmd>lua require(\'dap\').step_into()<CR>', opts)
-map('n', '<F12>', '<cmd>lua require(\'dap\').step_out()<CR>', opts)
-map('n', '<Leader>b', '<cmd>lua require(\'dap\').toggle_breakpoint()<CR>', opts)
-map('n', '<Leader>dr', '<cmd>lua require(\'dap\').repl.open()<CR>', opts)
-map('n', '<Leader>dl', '<cmd>lua require(\'dap\').run_last()<CR>', opts)
+vim.keymap.set('n', '<F5>', '<cmd>lua require(\'dap\').continue()<CR>')
+vim.keymap.set('n', '<F10>', '<cmd>lua require(\'dap\').step_over()<CR>')
+vim.keymap.set('n', '<F11>', '<cmd>lua require(\'dap\').step_into()<CR>')
+vim.keymap.set('n', '<F12>', '<cmd>lua require(\'dap\').step_out()<CR>')
+vim.keymap.set('n', '<Leader>b', '<cmd>lua require(\'dap\').toggle_breakpoint()<CR>')
+vim.keymap.set('n', '<Leader>dr', '<cmd>lua require(\'dap\').repl.open()<CR>')
+vim.keymap.set('n', '<Leader>dl', '<cmd>lua require(\'dap\').run_last()<CR>')

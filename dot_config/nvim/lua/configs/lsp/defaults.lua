@@ -1,6 +1,4 @@
-local M = {
-  enabled_servers = { 'sumneko_lua' },
+return {
+  enabled_servers = { 'gopls', 'clangd', 'sumneko_lua' },
   config = {},
 }
-
-return M

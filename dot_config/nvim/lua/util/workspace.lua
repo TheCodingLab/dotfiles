@@ -25,11 +25,11 @@ function M.load(filename)
 
   filename = string.gsub(filename, '%.', '/')
 
-  local path = M.config_dir / (filename .. '.lua')
-  return xpcall(eval, error_handler, path:absolute())
+  local p = M.config_dir / (filename .. '.lua')
+  return xpcall(eval, error_handler, p:absolute())
 end
 
-function M.setup(opts)
+function M.init(opts)
   opts = tbl.merge(default_opts, opts)
 
   local config_dir = path:new(opts.config_dir)
@@ -41,12 +41,10 @@ function M.setup(opts)
   M.config_dir = config_dir
   M.loaded = true
 
-  local status_ok, init_module = M.load('init')
+  local status_ok, _ = M.load('init')
   if not status_ok then
     return
   end
-
-  init_module.setup()
 end
 
 return M
