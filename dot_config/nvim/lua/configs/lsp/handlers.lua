@@ -3,9 +3,9 @@ local M = {}
 function M.setup()
   local signs = {
     { name = 'DiagnosticSignError', text = '' },
-    { name = 'DiagnosticSignWarn', text = '' },
-    { name = 'DiagnosticSignHint', text = '' },
-    { name = 'DiagnosticSignInfo', text = '' },
+    { name = 'DiagnosticSignWarn',  text = '' },
+    { name = 'DiagnosticSignHint',  text = '' },
+    { name = 'DiagnosticSignInfo',  text = '' },
   }
 
   for _, sign in ipairs(signs) do
@@ -64,7 +64,9 @@ local function lsp_autoformat(client)
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
       group = vim.api.nvim_create_augroup('lsp_autoformat', { clear = true }),
       callback = function()
-        vim.lsp.buf.format()
+        vim.lsp.buf.format({
+          async = false,
+        })
       end,
     })
   end

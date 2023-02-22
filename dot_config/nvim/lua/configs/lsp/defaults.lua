@@ -1,4 +1,4 @@
 return {
-  enabled_servers = { 'gopls', 'clangd', 'sumneko_lua' },
+  enabled_servers = { 'gopls', 'clangd', 'lua_ls' },
   config = {},
 }

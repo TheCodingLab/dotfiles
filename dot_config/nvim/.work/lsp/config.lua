@@ -1,9 +1,9 @@
 local runtime_path = vim.split(package.path, ';')
 
 return {
-  enabled_servers = { 'sumneko_lua' },
+  enabled_servers = { 'lua_ls' },
   config = {
-    sumneko_lua = {
+    lua_ls = {
       settings = {
         Lua = {
           runtime = {

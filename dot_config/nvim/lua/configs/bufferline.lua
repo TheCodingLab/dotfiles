@@ -6,7 +6,6 @@ end
 local colors = {
   fg = '#787e87',
   fg_lighter = '#abb2bf',
-
   bg = '#2c323c',
   bg_darker = '#1e222a',
 }
