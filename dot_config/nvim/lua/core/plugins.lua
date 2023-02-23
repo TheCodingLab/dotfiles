@@ -26,6 +26,9 @@ return packer.startup(function (use)
   use { 'williamboman/mason-lspconfig.nvim' }
   use { 'folke/trouble.nvim' }
 
+  use { 'ms-jpq/coq_nvim', branch = 'coq' }
+  use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
+
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter' }
   use { 'nvim-treesitter/playground' }
