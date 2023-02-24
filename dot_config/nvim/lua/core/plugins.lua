@@ -2,7 +2,7 @@ local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -16,7 +16,7 @@ if not status_ok then
   return
 end
 
-return packer.startup(function (use)
+return packer.startup(function(use)
   use { 'wbthomason/packer.nvim' }
   use { 'nvim-lua/plenary.nvim' }
 
@@ -32,7 +32,7 @@ return packer.startup(function (use)
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter' }
   use { 'nvim-treesitter/playground' }
-  
+
   -- telescope
   use { 'nvim-telescope/telescope.nvim' }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -43,8 +43,9 @@ return packer.startup(function (use)
   -- theme
   use { 'navarasu/onedark.nvim' }
   use { 'nvim-tree/nvim-web-devicons' }
-  
+
   -- other
+  use { 'nvim-lualine/lualine.nvim' }
   use { 'akinsho/bufferline.nvim' }
   use { 'numToStr/Comment.nvim' }
 

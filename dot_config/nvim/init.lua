@@ -6,6 +6,7 @@ require('core.mappings')
 
 require('config.bufferline')
 require('config.comment')
+require('config.lualine')
 require('config.nvim-tree')
 require('config.telescope')
 require('config.treesitter')
