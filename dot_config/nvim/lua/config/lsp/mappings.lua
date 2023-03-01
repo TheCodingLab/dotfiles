@@ -1,6 +1,6 @@
 local M = {}
 
-local function lsp_hover_highlight(client)
+local function lsp_hover_highlight(client, bufnr)
   if not client.server_capabilities.documentHighlightProvider then
     return
   end
@@ -13,6 +13,7 @@ local function lsp_hover_highlight(client)
   })
 
   vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+    buffer = bufnr,
     group = vim.api.nvim_create_augroup('lsp_document_highlight_moved', { clear = true }),
     callback = function()
       vim.lsp.buf.clear_references()
@@ -20,12 +21,13 @@ local function lsp_hover_highlight(client)
   })
 end
 
-local function lsp_autoformat(client)
+local function lsp_autoformat(client, bufnr)
   if not client.server_capabilities.documentFormattingProvider then
     return
   end
 
   vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    buffer = bufnr,
     group = vim.api.nvim_create_augroup('lsp_autoformat', { clear = true }),
     callback = function()
       vim.lsp.buf.format({ async = false })
@@ -34,7 +36,7 @@ local function lsp_autoformat(client)
 end
 
 local function lsp_keymap(client, bufnr)
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -68,8 +70,8 @@ local function lsp_keymap(client, bufnr)
 end
 
 function M.on_attach(client, bufnr)
-  lsp_hover_highlight(client)
-  lsp_autoformat(client)
+  lsp_hover_highlight(client, bufnr)
+  lsp_autoformat(client, bufnr)
   lsp_keymap(client, bufnr)
 end
 

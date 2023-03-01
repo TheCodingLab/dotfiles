@@ -48,6 +48,7 @@ return packer.startup(function(use)
   use { 'nvim-lualine/lualine.nvim' }
   use { 'akinsho/bufferline.nvim' }
   use { 'numToStr/Comment.nvim' }
+  use { 'moll/vim-bbye' }
 
   if packer_bootstrap then
     packer.sync()

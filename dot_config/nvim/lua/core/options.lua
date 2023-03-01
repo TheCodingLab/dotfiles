@@ -19,7 +19,7 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 
 vim.opt.mouse = 'a'
-vim.opt.shortmess = 'I'
+vim.opt.shortmess = 'IF'
 
 vim.opt.listchars = {
   eol = '¬',

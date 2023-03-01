@@ -9,7 +9,7 @@ telescope.setup({
   },
   pickers = {
     find_files = {
-      find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+      find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' }
     },
   },
   extensions = {
@@ -17,7 +17,7 @@ telescope.setup({
       fuzzy = true,
       override_generic_sorter = true,
       override_file_sorter = true,
-      case_mode = "smart_case",
+      case_mode = 'smart_case',
     },
   },
 })
