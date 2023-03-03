@@ -14,6 +14,14 @@ bufferline.setup({
       enabled = false,
     },
 
+    offsets = {
+      {
+        filetype = 'NvimTree',
+        text = vim.fn.getcwd,
+        highlight = 'Directory',
+      },
+    },
+
     sort_by = 'directory',
   }
 })
