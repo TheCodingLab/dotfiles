@@ -49,6 +49,7 @@ return packer.startup(function(use)
   use { 'nvim-lualine/lualine.nvim' }
   use { 'akinsho/bufferline.nvim' }
   use { 'numToStr/Comment.nvim' }
+  use { 'folke/todo-comments.nvim' }
   use { 'moll/vim-bbye' }
 
   if packer_bootstrap then
