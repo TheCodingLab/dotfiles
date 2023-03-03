@@ -25,6 +25,7 @@ return packer.startup(function(use)
   use { 'williamboman/mason.nvim' }
   use { 'williamboman/mason-lspconfig.nvim' }
   use { 'folke/trouble.nvim' }
+  use { 'folke/neodev.nvim' }
 
   use { 'ms-jpq/coq_nvim', branch = 'coq' }
   use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
