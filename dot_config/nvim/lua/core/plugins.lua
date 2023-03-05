@@ -52,6 +52,9 @@ return packer.startup(function(use)
   use { 'folke/todo-comments.nvim' }
   use { 'moll/vim-bbye' }
 
+  -- syntax highlighting
+  use { 'ARM9/arm-syntax-vim' }
+
   if packer_bootstrap then
     packer.sync()
   end

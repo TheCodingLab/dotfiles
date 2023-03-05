@@ -1,6 +1,5 @@
 vim.opt.fileencoding = 'utf-8'
 
-vim.opt.spell = true
 vim.opt.spelllang = 'en'
 
 vim.opt.number = true
