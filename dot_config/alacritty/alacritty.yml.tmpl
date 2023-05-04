@@ -6,16 +6,13 @@ scrolling:
 
 font:
 {{- if eq .chezmoi.os "linux" }}
-  size: 10.0
-  normal:
-    family: SauceCodePro Nerd Font Mono
-    style: Semibold
+  size: 11.0
 {{- else }}
   size: 14.0
+{{- end }}
   normal:
     family: SauceCodePro Nerd Font Mono
     style: Regular
-{{- end }}
   bold:
     family: SauceCodePro Nerd Font Mono
     style: Bold
